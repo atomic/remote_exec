@@ -6,7 +6,7 @@ import sys, getopt
 # Client machine: ./client --server <server ip> --user <username> --password <password> --exec <program to execute>
 
 def main(argv):
-    global command, ip
+    global command, ip, user, password
     try:
         opts, args = getopt.getopt(argv[1:], "hsupx", ["server=", "user=", "password=", "exec="])
     except getopt.GetoptError:
@@ -14,7 +14,7 @@ def main(argv):
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print('test.py -i <inputfile> -o <outputfile>')
+            print('./client --server <server ip> --user <username> --password <password> --exec <program to execute>')
             sys.exit()
         elif opt in ("-s", "--server"):
             ip = arg
@@ -28,7 +28,7 @@ def main(argv):
     port = "8888"
 
     with xmlrpc.client.ServerProxy("http://" + ip + ":" + port) as proxy:
-        result = proxy.execute(command)
+        result = proxy.execute(user, password, command)
         print(result)
 
 

@@ -1,0 +1,6 @@
+[alice]
+password=1234
+permissions=ls,tree,ps
+[bob]
+password=1234
+permissions=ls,ifconfig
